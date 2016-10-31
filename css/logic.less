@@ -1,0 +1,146 @@
+//Fonts
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+@basicfontstack:'Roboto', serif;
+@displayfontstack:'Roboto Slab', sans-serif;
+
+
+//Colors
+
+@blue: #0a3a5c;
+@lightblue: #00b9e5;
+@paleblue: #c1dde9;
+@faintblue: #f1f8f9;
+@orange: #f37e48;
+@yellow: #ffb91d;
+@magenta: #d8006d;
+@lightbrown: #aea79f;
+@grey: #3d3e43;
+@darkgrey: darken(@grey, 20%);
+@lightgrey: @grey + #333;
+@nearwhite: #eee;
+
+@basictextcolor: @blue;
+@textbrown: #69300a;
+@accent: @magenta;
+@lightaccent: lighten(@accent, 10%);
+@red: red;
+@warning: @red;
+
+
+//Size
+
+@desktop-width: 1400px;
+	@desktop-break: (@desktop-width - 1);
+@desktopSmall-width: 1200px;
+	@desktopSmall-break: (@desktopSmall-width - 1);
+@tabletLandscape-width: 1024px;
+	@tabletLandscape-break: (@tabletLandscape-width - 1);
+@tabletPortrait-width: 768px;
+	@tabletPortrait-break: (@tabletPortrait-width - 1);
+@mobile-width: 568px;
+	@mobile-break: (@mobile-width - 1);
+
+
+//Mixins
+
+.FlexBox(@justify:center,@alignItems:flex-start,@direction:row,@wrap:wrap) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: @justify;
+    -webkit-align-items: @alignItems;
+    align-items: @alignItems;
+    flex-direction: @direction;
+    flex-wrap: @wrap;
+}
+.Flex(@arguments) {
+	flex: @arguments;
+	-ms-flex: 0 0 @arguments;
+}
+.FlexBasis(@arguments) {
+	flex-basis: @arguments;
+	-ms-flex: 0 0 @arguments;
+	& when (@arguments = "100%") {
+		-ms-flex: 0 0 auto;
+	}
+}
+	 
+.Transform(@arguments) {
+	& when (@arguments = "none") {
+		transform: none;
+		-ms-transform: none;
+		-moz-transform: none;
+		-webkit-transform: none;
+		-o-transform: none;
+	}
+	transform: @arguments;
+	-ms-transform: @arguments;
+	-moz-transform: @arguments;
+	-webkit-transform: @arguments;
+	-o-transform: @arguments;
+}
+.TransformOrigin(@arguments) {
+    -ms-transform-origin: @arguments;
+    -webkit-transform-origin: @arguments;
+    transform-origin: @arguments;
+}
+	 
+.Transition(@properties:all,@timing:.2s) {
+    -webkit-transition: @properties @timing;
+    transition: @properties @timing;
+}
+
+.Perspective(@arguments: 600px, @origin: 50% 50%) {
+	-webkit-perspective: @arguments;
+	-ms-perspective: @arguments;
+	perspective: @arguments;
+
+    -webkit-perspective-origin: @origin;
+    perspective-origin: @origin;
+}
+	
+.Delay(@Timing){
+	-webkit-transition-delay: @Timing;
+	transition-delay: @Timing;
+	-webkit-animation-delay: @Timing;
+	animation-delay: @Timing;
+}
+
+.Keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+	 
+.BoxSizing(@arguments:border-box) {
+    -moz-box-sizing: @arguments;
+    -webkit-box-sizing: @arguments;
+    box-sizing: @arguments;
+}
+
+.ClipPath(@arguments) {
+    clip-path: @arguments;
+    -webkit-clip-path: @arguments;
+}
+	
+.ClearFix() {
+	* html & {
+		height: 1%;
+		overflow: visible;
+	}
+	*+html & {
+		min-height: 1%;
+	}
+	&:after {
+		content: "";
+		display: block;
+		height: 0 !important;
+		overflow: hidden;
+		position: static !important;
+		clear: both;
+	}
+}
