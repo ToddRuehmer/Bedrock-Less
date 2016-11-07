@@ -73,60 +73,6 @@ $.fn.scrollLink = function (e) {
 };
 
 
-/* Sticky Nav
-========================================================== */
-function StickyNav(el, i) {
-    if (!(this instanceof StickyNav)) {
-        return new StickyNav(el);
-    }
-    var self = this;
-        self.$header = $('.js-Header'),
-        self.$main = $('.js-Main'),
-        self.$siteId = $('.js-SiteId'),
-        self.$utility = $('.js-Utility'),
-        self.$nav = $('.js-MainNavigation');
-
-    //Determine Numbers
-    self.adjust();
-    $(window).resize(function(){self.adjust()});
-    //Check State
-    self.stick();
-}
-StickyNav.prototype = {
-    adjust: function(index){
-        var self = this;
-
-        if (VARS.windowWidth > VARS.tabletLandscape-1) {
-            self.$header.height = self.$header.outerHeight();
-        } else {
-            self.$header.height = 'auto';
-        }
-        console.log(self.$header.height);
-
-        self.stickAt = self.$nav.offset().top;
-        if(self.stickAt > self.$siteId.offset().top && self.$siteId.offset().top != 0) {
-            self.stickAt = self.$siteId.offset().top;
-        }
-        if(self.stickAt > self.$utility.offset().top && self.$utility.offset().top != 0) {
-            self.stickAt = self.$utility.offset().top;
-        }
-    },
-    stick: function(){
-        var self = this;
-
-        self.scrollPos = $(window).scrollTop();
-        if(self.scrollPos >= self.stickAt && VARS.windowWidth > VARS.tabletLandscape-1) {
-            self.$header.addClass('MG-v-Stuck');
-            self.$main.css({paddingTop: self.$header.height});
-        } else {
-            self.$header.removeClass('MG-v-Stuck');
-            self.$main.css({paddingTop: 0});
-        }
-        window.requestAnimationFrame(self.stick.bind(self));
-    }
-};
-
-
 /* Mobile Nav
 ========================================================== */
 function MobileNav(el, i) {
